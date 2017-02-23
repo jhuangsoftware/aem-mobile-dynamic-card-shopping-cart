@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Products Carousel</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/handlebars-v4.0.5.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/page-meta.js"></script>
+    <script src="js/custom.js"></script>
+
+    <script id="template-page" type="text/x-handlebars-template">​
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{entity.thumbnailimage}}" class="img-responsive img-thumbnail"/>
+                <br />
+                <br />
+            </div>
+            <div class="col-md-6">
+                <div class="product-name hidden">{{entity.metadata.entityName}}</div>
+                <div class="product-title">{{entity.metadata.title}}</div>
+                <div>
+                    {{entity.metadata.abstract}}
+                </div>
+                {{#if entity.price}}
+                <div class="product-price">${{entity.price}}</div>
+                {{/if}}
+                <div class="product-info">
+                    <div class="">Color</div>
+                    <div class="btn-group product-color" data-toggle="buttons">
+                        <label class="btn btn-lg btn-default active">
+                            <input type="radio" name="options-color" value="default" autocomplete="off" checked> &nbsp;
+                        </label>
+                        <label class="btn btn-lg btn-primary">
+                            <input type="radio" name="options-color" value="primary" autocomplete="off"> &nbsp;
+                        </label>
+                        <label class="btn btn-lg btn-success">
+                            <input type="radio" name="options-color" value="success" autocomplete="off"> &nbsp;
+                        </label>
+                        <label class="btn btn-lg btn-info">
+                            <input type="radio" name="options-color" value="info" autocomplete="off"> &nbsp;
+                        </label>
+                        <label class="btn btn-lg btn-warning">
+                            <input type="radio" name="options-color" value="warning"autocomplete="off"> &nbsp;
+                        </label>
+                        <label class="btn btn-lg btn-danger">
+                            <input type="radio" name="options-color" value="danger" autocomplete="off"> &nbsp;
+                        </label>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="">Size</div>
+                    <div class="btn-group product-size" data-toggle="buttons">
+                        <label class="btn btn-lg btn-default">
+                            <input type="radio" name="options-size" value="XS" autocomplete="off"> XS
+                        </label>
+                        <label class="btn btn-lg btn-default">
+                            <input type="radio" name="options-size" value="S" autocomplete="off"> S
+                        </label>
+                        <label class="btn btn-lg btn-default">
+                            <input type="radio" name="options-size" value="M" autocomplete="off"> M
+                        </label>
+                        <label class="btn btn-lg btn-default active">
+                            <input type="radio" name="options-size" value="L" autocomplete="off" checked> L
+                        </label>
+                        <label class="btn btn-lg btn-default">
+                            <input type="radio" name="options-size" value="XL" autocomplete="off"> XL
+                        </label>
+                    </div>
+                </div>
+                <div class="product-controls pull-right">
+                    <div class="btn btn-lg btn-info add-to-cart">Add to Cart</div>
+                </div>
+            </div>
+        </div>
+    ​</script>
+    <script id="template-confirmation-dialog" type="text/x-handlebars-template">​
+        <div class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Item Added</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="thumbnail">
+                            <img src="{{entity.thumbnailimage}}" alt="{{entity.metadata.title}}">
+                            <div class="caption">
+                                <h3>{{entity.metadata.title}}</h3>
+                                <div class="product-info">
+                                    <div class="label label-success">${{entity.price}}</div>
+                                    <div class="label label-{{cartentity.color}}">{{cartentity.size}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn btn-default" data-dismiss="modal">OK</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</head>
+<body>
+    <div class="container-fluid" id="page">
+        <div class="alert alert-warning">Loading...</div>
+    </div>
+    <div id="confirmation-dialog">
+    </div>
+</body>
+</html>
